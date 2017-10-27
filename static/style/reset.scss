@@ -1,0 +1,53 @@
+/**
+**  修改默认样式
+**  Created on 2017-10-27 by Cara
+**/
+
+* {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+    font-family: 'Segoe UI', 'Microsoft YaHei', Arial;
+}
+
+a,
+a:hover,
+a:active,
+a:focus,
+input,
+input:hover,
+input:active,
+input:focus,
+select,
+select:hover,
+select:active,
+select:focus,
+textarea,
+textarea:hover,
+textarea:active,
+textarea:focus {
+    outline: none;
+}
+
+button,
+button:active,
+button:focus,
+button:hover {
+    outline: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+label {
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 5px;
+}
