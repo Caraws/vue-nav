@@ -40,3 +40,28 @@ $bg-color2: #f0f0f0;
 $light-shadow: 0 0 3px 1px rgba(0, 0, 0, .36);
 $shadow: 0 0 5px 3px rgba(0, 0, 0, .16);
 $dark-shadow: 0 0 5px 3px rgba(0, 0, 0, .16);
+// 颜色集合
+$color: (roseate $roseate 50%),
+(masstone $masstone 30%),
+(light-default $light-default 10%),
+(default $default 20%),
+(default2 $default2 60%),
+(light-red $light-red 40%),
+(red $red 40%),
+(dark-red $dark-red 40%),
+(light-blue $light-blue 20%),
+(blue $blue 25%),
+(dark-blue $dark-blue 20%),
+(yellow $yellow 25%),
+(light-green $light-green 20%),
+(green $green 20%),
+(dark-green $dark-green 20%),
+(light-black $light-black 40%),
+(black $black 50%),
+(white $white 0),
+(pink $pink 10%),
+(orange $orange 30%),
+(gray $gray 40%),
+(sliver $sliver 20%),
+(brown $brown 20%),
+(light-gray $light-gray 10%);

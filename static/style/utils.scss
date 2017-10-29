@@ -1,0 +1,26 @@
+/**
+**  mixin 类名等方法集合 (不应用具体样式)
+** Created on 2017-10-29 by Cara 
+**/
+
+// 大小
+@mixin boxSize ($width: auto, $height: auto) {
+    width: $width;
+    height: $height;
+}
+
+// 清除浮动
+.clear-fied {
+     ::after {
+        content: '';
+        clear: both;
+        display: inline-block;
+    }
+}
+
+// FLEX
+@mixin flexBox ($justify: flex-start, $align: flex-start) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}

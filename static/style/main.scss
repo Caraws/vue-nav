@@ -1,0 +1,11 @@
+@import './max-utils.scss';
+footer {
+    width: 100%;
+    height: 600px;
+    @include flexBox (center, center);
+    background: $gray;
+    p {
+        font-size: 36px;
+        color: $default;
+    }
+}
