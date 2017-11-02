@@ -1,5 +1,5 @@
 /**
-**  颜色收集集合
+**  颜色收集集合 (不直接设置业务样式)
 **  Created on 2017-10-27 by Cara
 **/
 
@@ -41,7 +41,7 @@ $light-shadow: 0 0 3px 1px rgba(0, 0, 0, .36);
 $shadow: 0 0 5px 3px rgba(0, 0, 0, .16);
 $dark-shadow: 0 0 5px 3px rgba(0, 0, 0, .16);
 // 颜色集合
-$color: (roseate $roseate 50%),
+$colors: (roseate $roseate 50%),
 (masstone $masstone 30%),
 (light-default $light-default 10%),
 (default $default 20%),
