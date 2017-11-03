@@ -1,0 +1,58 @@
+$item-width: 80px;
+$item-height: 50px;
+$bg-zIndex: 5;
+$ul-zIndex: 9;
+.vue-nav-wrapper {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    min-width: 48px;
+    width: $item-width;
+    font-size: 12px;
+    cursor: pointer;
+    .vue-nav {
+        position: relative;
+        border: thin solid #e5e9ef;
+        border-radius: 5px;
+        overflow: hidden;
+        z-index: $ul-zIndex;
+        li {
+            text-align: center;
+            background: #f6f9fa;
+        }
+        .nav-item {
+            height: $item-height;
+            width: $item-width;
+            line-height: $item-height;
+            &.active {
+                transition: color .3s;
+                color: #fff;
+            }
+            .nav-item-name {
+                position: relative;
+                z-index: 10;
+            }
+        }
+        &.noDraging li:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .pointer-block {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: $item-height;
+            background-color: #3498db;
+            transition: top .3s;
+        }
+        .drag-block {
+            position: absolute;
+            width: 100%;
+            height: $item-height;
+            color: #fff;
+            z-index: $ul-zIndex + 1;
+            background-color: #3498db;
+        }
+    }
+}

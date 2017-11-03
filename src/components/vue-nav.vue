@@ -60,7 +60,7 @@ export default {
     },
     computed: {
         active () {
-            // if (this.isInScope) return 
+            // if (!this.isInScope) return false
             let active;
             for (let i = 0, len = this.data.length; i < len; i++) {
                 if (this.scrollTop >= this.data[i].offsetTop - this.offset) {
@@ -77,7 +77,8 @@ export default {
         },
         isInScope () {
             if (!this.data.length || 
-            this.scrollTop < (this.data[0].offsetTop - this.screenHeight) || this.scrollTop > (this.data[this.data.length - 1].offsetTop - this.data[this.data.length - 1].height)) {
+            this.scrollTop < 0 || 
+            this.scrollTop > this.data[this.data.length - 1].offsetTop + this.data[this.data.length - 1].height) {
                 return false
             }
             return true
@@ -93,6 +94,7 @@ export default {
     },
     methods: {
         init () {
+            this.dragId = this.options.bindData[0].id
             this.getData()
             document.addEventListener('scroll', this.scroll, false)
             this.screenHeight = window.screen.availHeight
@@ -115,14 +117,19 @@ export default {
         scroll () {
             this.scrollTop = window.pageYOffset || document.body.scrollTop
         },
-        setActive (i) {
-            if (i === this.current || this.mode === 'sortable') return
-            let target = this.data[i].el
+        setActive (i, bool) {
+            if (i === this.current ||  this.mode === 'sortable') return false
+            let target = this.data[i].el,
+                number = 0
             this.isClickScroll = true
             this.targetValue = i
+            number++
             this.scrollToEl(target, this.time, this.offset || 0)
             .then( _ => {
-                this.isClickScroll = false
+                number--
+                if (number === 0) {
+                    this.isClickScroll = false
+                }
             })
         }
     }
