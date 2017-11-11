@@ -66,7 +66,7 @@ export default {
     computed: {
         options: function () {
             let options = {
-                offset: - this.getWinH / 2,
+                offset: 0,
                 bindData: this.navs,
                 backToTop: 0
             }

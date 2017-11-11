@@ -13,7 +13,7 @@ $viewHeight: 100%;
     }
     footer {
         width: 100%;
-        height: 600px;
+        height: 1000px;
         @include flexBox (center, center);
         background: $gray;
         p {
