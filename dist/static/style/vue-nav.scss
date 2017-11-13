@@ -20,6 +20,11 @@ $ul-zIndex: 9;
             text-align: center;
             background: #f6f9fa;
         }
+        // 排序时鼠标指针
+        &.sortable {
+            cursor: move;
+        }
+        // li
         .nav-item {
             height: $item-height;
             width: $item-width;
@@ -31,8 +36,12 @@ $ul-zIndex: 9;
             .nav-item-name {
                 position: relative;
                 z-index: 10;
+                &::selection {
+                    background: transparent;
+                }
             }
         }
+        //  滚动模式下hover变色
         &.noDraging li:hover {
             background-color: #3498db;
             color: #fff;
@@ -51,7 +60,7 @@ $ul-zIndex: 9;
             width: 100%;
             height: $item-height;
             color: #fff;
-            z-index: $ul-zIndex + 1;
+            z-index: $ul-zIndex + 10;
             background-color: #3498db;
         }
     }
