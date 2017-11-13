@@ -21,7 +21,7 @@
                     </div>
                 </li>
             </template>
-            <!-- 当前活动位置 -->
+            <!-- 指示当前活动位置 -->
             <li v-if="!!isInScope && mode === 'navigation'" 
                 class="pointer-block" 
                 :style="{ top: `${current * height}px` }">
@@ -145,6 +145,7 @@ export default {
             document.removeEventListener('mouseleave', this.dragEnd, false)
             document.removeEventListener('mousemove', this.dragMove, false)            
         },
+        // 初始化(导航栏)
         getData () {
             this.data = sortArray(Array.from(this.options.data, item => {
                 let el = document.getElementById(item.target)
@@ -209,8 +210,6 @@ export default {
             // 正好 x/ y 是相对于 ul 的坐标
             this.x = e.clientX - this.left - this.offsetX
             this.y = e.clientY - this.top - this.offsetY
-            console.log('x:' + this.x)
-            console.log('y:' + this.y)
         },
         // 拖拽开始
         dragStart (e, i) {
@@ -237,6 +236,7 @@ export default {
             // 交换的目标位置 id 与被拖拽的 id 不一致时
             if (this.exchangeId !== this.dragId) {
                 // 从目标位置插入拖拽目标
+                // 改变 page 排列
                 this.options.bindData.splice(this.exchangeId, 0, this.options.bindData.splice(this.dragId, 1)[0])
             }else {
                 // 否则跳到拖拽位置
