@@ -54,7 +54,8 @@ export default {
         isClickScroll: false,
         targetValue: 0,
         dragId: 0,
-        height: 50
+        height: 50,
+        pageIndex: 0
     }),
     mixins: [scrollMix],
     props: {
@@ -107,8 +108,8 @@ export default {
         // 拖拽体位置
         dragStyle () {
             return {
-                top: `${ this.x }px`,
-                left: `${ this.y }px`,
+                left: `${ this.x }px`,
+                top: `${ this.y }px`,
             }
         }
     },
@@ -132,14 +133,14 @@ export default {
         },
         // 监听事件
         addEvent () {
-            document.addEventListener('scroll', this.scroll, false)
+            document.addEventListener('scroll', this.throttle(this.scroll), false)
             document.addEventListener('mouseup', this.dragEnd, false)
             document.addEventListener('mouseleave', this.dragEnd, false)
             document.addEventListener('mousemove', this.dragMove, false)
         },
         // 移除监听
         removeEvent () {
-            document.removeEventListener('scroll', this.scroll, false)
+            document.removeEventListener('scroll', this.throttle(this.scroll), false)
             document.removeEventListener('mouseup', this.dragEnd, false)
             document.removeEventListener('mouseleave', this.dragEnd, false)
             document.removeEventListener('mousemove', this.dragMove, false)            
@@ -157,8 +158,30 @@ export default {
                 }
             }), 'offsetTop');
         },
-        scroll () {
+        scroll (e) {
             this.scrollTop = window.pageYOffset || document.body.scrollTop
+        },
+        // 节流
+        throttle (fn, interval) {
+            let originFn = fn,
+                timer,
+                firstTime = true;
+            return function () {
+                let args = arguments,
+                    that = this;
+                if (firstTime) {
+                    originFn.apply(that, args);
+                    firstTime = false
+                }
+                if (timer) {
+                    return false
+                }
+                timer = setInterval(function () {
+                    clearInterval(timer);
+                    timer = null;
+                    originFn.apply(that, args)
+                }, interval || 200)
+            }
         },
         // 点击设置当前区域
         setActive (i) {
@@ -180,10 +203,14 @@ export default {
         toggleMode () {
             this.mode = this.mode == 'navigation' ? 'sortable' : 'navigation'
         },
-        // 鼠标位置(e 为拖拽时的参数)
+        // 鼠标位置
         getPos (e) {
+            // 鼠标距页面位置 - ul 左边距页面距离 - 鼠标距目标元素距离
+            // 正好 x/ y 是相对于 ul 的坐标
             this.x = e.clientX - this.left - this.offsetX
             this.y = e.clientY - this.top - this.offsetY
+            console.log('x:' + this.x)
+            console.log('y:' + this.y)
         },
         // 拖拽开始
         dragStart (e, i) {
@@ -191,23 +218,22 @@ export default {
             if (this.mode === 'navigation') return
             this.isDrag = true
             this.dragId = i
-            // 鼠标距元素上边距/ 左边距位置
+            // 鼠标距目标元素上边距/ 左边距位置
             this.offsetX = e.offsetX
             this.offsetY = e.offsetY
             this.getPos(e)
         },
         // 拖拽移动
         dragMove (e) {
-            if (!this.isDrag) return
-            this.getPos(e)
+            if (this.isDrag) {
+                this.getPos(e)
+            }
             e.preventDefault()
         },
         // 拖拽结束
         dragEnd () {
             if(!this.isDrag) return
             this.isDrag = false
-            console.log(this.exchangeId)
-            console.log(this.dragId)
             // 交换的目标位置 id 与被拖拽的 id 不一致时
             if (this.exchangeId !== this.dragId) {
                 // 从目标位置插入拖拽目标
