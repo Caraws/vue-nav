@@ -26,18 +26,6 @@ const sortArray = (originArray, propertyName) => {
         }
         return arguments.callee(left, key).concat(pivot, arguments.callee(right, key))
     })(originArray, key)
-
-    // for (var i = 0; i < originArray.length - 1; i++) {
-    //     for (var j = 0; j < originArray.length - 1 - i; j++) {
-    //         if (originArray[j][propertyName] > originArray[j + 1][propertyName]) {
-    //             var tmp = originArray[j]
-    //             originArray[j] = originArray[j + 1]
-    //             originArray[j + 1] = tmp
-    //         }
-    //     }
-    // }
-    // return originArray
-
 }
 
 /**

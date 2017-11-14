@@ -54,8 +54,7 @@ export default {
         isClickScroll: false,
         targetValue: 0,
         dragId: 0,
-        height: 50,
-        pageIndex: 0
+        height: 50
     }),
     mixins: [scrollMix],
     props: {
